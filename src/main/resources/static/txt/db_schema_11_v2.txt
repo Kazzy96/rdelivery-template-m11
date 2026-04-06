@@ -1,0 +1,268 @@
+───────────────────────────────────────────────────────────────
+DATABASE SCHEMA DOCUMENTATION - Rocket Food Delivery
+───────────────────────────────────────────────────────────────
+
+OBJECTIVE: Create Java entity classes that match these database tables.
+Follow the table definitions exactly. Use the annotations as shown in the examples.
+
+───────────────────────────────────────────────────────────────
+BASICS DEFINITIONS
+───────────────────────────────────────────────────────────────
+
+PARAMETER
+┌──────────────┬──────────────────────────────────────────────────┐
+│ Parameter    │ Definition                                       │
+├──────────────┼──────────────────────────────────────────────────┤
+│ varchar      │ Variable character (String in Java)              │
+│ integer      │ Integer number (Integer in Java)                 │
+│ boolean      │ True/False value (Boolean in Java)               │
+│ primary key  │ Unique identifier                                │
+│ not null     │ Required field, cannot be empty                  │
+│ unique       │ Must be unique across all records                │
+│ default      │ Default value if not specified                   │
+└──────────────┴──────────────────────────────────────────────────┘
+
+NAMING CONVENTIONS
+┌─────────────────┬────────────────────┬──────────────────────────────┐
+│ Location        │ Convention         │ Example                      │
+├─────────────────┼────────────────────┼──────────────────────────────┤
+│ Database Table  │ snake_case         │ order_statuses               │
+│ Database Column │ snake_case         │ price_range, user_id         │
+│ Java Class      │ PascalCase         │ OrderStatus, Restaurant      │
+│ Java Variable   │ camelCase          │ priceRange, userId           │
+│ Java File Name  │ PascalCase.java    │ OrderStatus.java             │
+└─────────────────┴────────────────────┴──────────────────────────────┘
+
+───────────────────────────────────────────────────────────────
+ANNOTATION LIBRARIES
+───────────────────────────────────────────────────────────────
+
+OVERVIEW: Three annotation libraries work together
+
+┌─────────────┬──────────────────────────────┬─────────────────────────────────────────┐
+│ Library     │ Purpose                      │ When to Use                             │
+├─────────────┼──────────────────────────────┼─────────────────────────────────────────┤
+│ Lombok      │ Reduce boilerplate code      │ Auto-generate getters, setters, etc.    │
+│ JPA         │ Database mapping & relations │ Define how Java classes map to DB tables│
+│ Jakarta     │ Data validation              │ Validate user input and data integrity  │
+└─────────────┴──────────────────────────────┴─────────────────────────────────────────┘
+
+LOMBOK ANNOTATIONS (Code Generation)
+┌─────────────────────┬──────────────────────────────────────────────────────────┐
+│ Annotation          │ Purpose & What it Generates                              │
+├─────────────────────┼──────────────────────────────────────────────────────────┤
+│ @Data               │ Generates: getters, setters, toString, equals, hashCode │
+│ @NoArgsConstructor  │ Generates: constructor with no parameters               │
+│ @AllArgsConstructor │ Generates: constructor with all fields                  │
+│ @Builder            │ Generates: builder pattern for object creation          │
+│ @Getter / @Setter   │ Generates: only getters or setters                      │
+│ @ToString           │ Generates: toString method                               │
+└─────────────────────┴──────────────────────────────────────────────────────────┘
+
+JPA ANNOTATIONS (Database Mapping)
+┌─────────────────────┬──────────────────────────────────────────────────────────┐
+│ Annotation          │ Purpose & Example                                        │
+├─────────────────────┼──────────────────────────────────────────────────────────┤
+│ @Entity             │ Marks class as database table                            │
+│ @Table              │ Specifies table name: @Table(name = "restaurants")       │
+│ @Id                 │ Marks field as primary key                               │
+│ @GeneratedValue     │ Auto-increment ID: (strategy = GenerationType.IDENTITY)  │
+│ @Column             │ Maps to DB column: @Column(name = "price_range")         │
+│ @JoinColumn         │ Defines foreign key: @JoinColumn(name = "user_id")       │
+│ @ManyToOne          │ Many records → one record relationship                   │
+│ @OneToOne           │ One record → one record relationship                     │
+│ @OneToMany          │ One record → many records relationship                   │
+│ @ManyToMany         │ Many records → many records relationship                 │
+└─────────────────────┴──────────────────────────────────────────────────────────┘
+
+JAKARTA VALIDATION ANNOTATIONS (Data Validation)
+┌─────────────────────┬──────────────────────────────────────────────────────────┐
+│ Annotation          │ Purpose & Example                                        │
+├─────────────────────┼──────────────────────────────────────────────────────────┤
+│ @NotNull            │ Field cannot be null                                     │
+│ @NotBlank           │ String cannot be null, empty, or whitespace              │
+│ @Email              │ Validates email format                                   │
+│ @Min / @Max         │ Validates numeric range: @Min(1) @Max(3)                 │
+│ @Size               │ Validates length: @Size(min = 1, max = 100)              │
+│ @Pattern            │ Validates regex: @Pattern(regexp = "\\d{3}-\\d{4}")      │
+└─────────────────────┴──────────────────────────────────────────────────────────┘
+
+
+───────────────────────────────────────────────────────────────
+STEP 3: FOLLOW THE TABLE DEFINITIONS
+───────────────────────────────────────────────────────────────
+
+Instructions:
+1. Create one Java class for each table below
+2. Follow naming conventions: Table "order_statuses" → Class "OrderStatus"
+3. Map each column using @Column with the exact database column name
+4. Use appropriate data types: varchar→String, integer→Integer, boolean→Boolean
+5. Add any relationships
+6. Include all necessary validation annotations
+7. Add any missing imports, parameters, annotations and constraints
+
+═══════════════════════════════════════════════════════════════
+
+TABLE USERS
+┌────────────┬─────────┬───────────────────┐
+│ Column     │ Type    │ Restrictions      │
+├────────────┼─────────┼───────────────────┤
+│ id         │ integer │ primary key       │
+│ name       │ varchar │ not null          │
+│ email      │ varchar │ not null, unique  │
+│ password   │ varchar │ not null          │
+└────────────┴─────────┴───────────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE ADDRESSES
+┌────────────────┬─────────┬───────────────┐
+│ Column         │ Type    │ Restrictions  │
+├────────────────┼─────────┼───────────────┤
+│ id             │ integer │ primary key   │
+│ street_address │ varchar │ not null      │
+│ city           │ varchar │ not null      │
+│ postal_code    │ varchar │ not null      │
+└────────────────┴─────────┴───────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE EMPLOYEES
+┌────────────┬─────────┬───────────────────┐
+│ Column     │ Type    │ Restrictions      │
+├────────────┼─────────┼───────────────────┤
+│ id         │ integer │ primary key       │
+│ user_id    │ integer │ not null, unique  │
+│ address_id │ integer │ not null          │
+│ phone      │ varchar │ not null          │
+│ email      │ varchar │                   │
+└────────────┴─────────┴───────────────────┘
+
+┌───────────────────────────────────────┬──────────────────────────────────────────────┬─────────────┐
+│ Relationship                          │ Explanation                                  │ On Delete   │
+├───────────────────────────────────────┼──────────────────────────────────────────────┼─────────────┤
+│ employees.user_id - users.id          │ Each employee has one unique user account.   │ NO ACTION   │
+│ employees.address_id > addresses.id   │ Many employees can share the same address.   │ NO ACTION   │
+└───────────────────────────────────────┴──────────────────────────────────────────────┴─────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE RESTAURANTS
+┌────────────┬─────────┬─────────────────────────┬──────────────┐
+│ Column     │ Type    │ Restrictions            │ Range Value  │
+├────────────┼─────────┼─────────────────────────┼──────────────┤
+│ id         │ integer │ primary key             │              │
+│ user_id    │ integer │ not null                │              │
+│ address_id │ integer │ not null, unique        │              │
+│ phone      │ varchar │ not null                │              │
+│ email      │ varchar │                         │              │
+│ name       │ varchar │ not null                │              │
+│ price_range│ integer │ not null, default: 1    │ 1 to 3       │
+│ active     │ boolean │ not null, default: true │              │
+└────────────┴─────────┴─────────────────────────┴──────────────┘
+
+┌───────────────────────────────────────┬──────────────────────────────────────────────────────────────┬─────────────┐
+│ Relationship                          │ Explanation                                                  │ On Delete   │
+├───────────────────────────────────────┼──────────────────────────────────────────────────────────────┼─────────────┤
+│ restaurants.user_id > users.id        │ Many restaurants can be owned by the same user.              │ NO ACTION   │
+│ restaurants.address_id - addresses.id │ Each restaurant has one unique business address.             │ NO ACTION   │
+└───────────────────────────────────────┴──────────────────────────────────────────────────────────────┴─────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE CUSTOMERS
+┌────────────┬─────────┬───────────────────────────┐
+│ Column     │ Type    │ Restrictions              │
+├────────────┼─────────┼───────────────────────────┤
+│ id         │ integer │ primary key               │
+│ user_id    │ integer │ not null, unique          │
+│ address_id │ integer │ not null                  │
+│ phone      │ varchar │ not null                  │
+│ email      │ varchar │                           │
+│ active     │ boolean │ not null, default: true   │
+└────────────┴─────────┴───────────────────────────┘
+
+┌───────────────────────────────────────┬──────────────────────────────────────────────────────┬─────────────┐
+│ Relationship                          │ Explanation                                          │ On Delete   │
+├───────────────────────────────────────┼──────────────────────────────────────────────────────┼─────────────┤
+│ customers.user_id - users.id          │ Each customer has one unique user account.           │ NO ACTION   │
+│ customers.address_id > addresses.id   │ Many customers can share the same delivery address.  │ NO ACTION   │
+└───────────────────────────────────────┴──────────────────────────────────────────────────────┴─────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE PRODUCTS
+┌───────────────┬─────────┬───────────────┬──────────────┐
+│ Column        │ Type    │ Restrictions  │ Range Value  │
+├───────────────┼─────────┼───────────────┼──────────────┤
+│ id            │ integer │ primary key   │              │
+│ restaurant_id │ integer │ not null      │              │
+│ name          │ varchar │ not null      │              │
+│ description   │ varchar │               │              │
+│ cost          │ integer │ not null      │ minimum: 0   │
+└───────────────┴─────────┴───────────────┴──────────────┘
+
+┌─────────────────────────────────────────┬─────────────────────────────────────────────────┬─────────────┐
+│ Relationship                            │ Explanation                                     │ On Delete   │
+├─────────────────────────────────────────┼─────────────────────────────────────────────────┼─────────────┤
+│ products.restaurant_id > restaurants.id │ Many products belong to one restaurant's menu.  │ CASCADE     │
+└─────────────────────────────────────────┴─────────────────────────────────────────────────┴─────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE ORDER_STATUSES
+┌──────────┬─────────┬───────────────┬──────────────────────────────────┐
+│ Column   │ Type    │ Restrictions  │ Allowed Values                   │
+├──────────┼─────────┼───────────────┼──────────────────────────────────┤
+│ id       │ integer │ primary key   │                                  │
+│ name     │ varchar │ not null      │ pending, in progress, delivered  │
+└──────────┴─────────┴───────────────┴──────────────────────────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE ORDERS
+┌────────────────────┬─────────┬───────────────┬──────────────┐
+│ Column             │ Type    │ Restrictions  │ Range Value  │
+├────────────────────┼─────────┼───────────────┼──────────────┤
+│ id                 │ integer │ primary key   │              │
+│ restaurant_id      │ integer │ not null      │              │
+│ customer_id        │ integer │ not null      │              │
+│ order_status_id    │ integer │ not null      │              │
+│ restaurant_rating  │ integer │ optional      │ 1 to 5       │
+└────────────────────┴─────────┴───────────────┴──────────────┘
+
+┌────────────────────────────────────────────┬────────────────────────────────────────────┬─────────────┐
+│ Relationship                               │ Explanation                                │ On Delete   │
+├────────────────────────────────────────────┼────────────────────────────────────────────┼─────────────┤
+│ orders.restaurant_id > restaurants.id      │ Many orders can belong to one restaurant.  │ CASCADE     │
+│ orders.customer_id > customers.id          │ Many orders can belong to one customer.    │ NO ACTION   │
+│ orders.order_status_id > order_statuses.id │ Many orders can share the same status.     │ NO ACTION   │
+└────────────────────────────────────────────┴────────────────────────────────────────────┴─────────────┘
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+TABLE PRODUCT_ORDERS
+┌────────────────────┬─────────┬───────────────┬─────────────┐
+│ Column             │ Type    │ Restrictions  │ Range Value │
+├────────────────────┼─────────┼───────────────┼─────────────┤
+│ id                 │ integer │ primary key   │             │
+│ product_id         │ integer │ not null      │             │
+│ order_id           │ integer │ not null      │             │
+│ product_quantity   │ integer │ not null      │ minimum: 1  │
+│ product_unit_cost  │ integer │ not null      │ minimum: 0  │
+└────────────────────┴─────────┴───────────────┴─────────────┘
+
+┌─────────────────────────────────────────┬─────────────────────────────────────────────────┬─────────────┐
+│ Relationship                            │ Explanation                                     │ On Delete   │
+├─────────────────────────────────────────┼─────────────────────────────────────────────────┼─────────────┤
+│ product_orders.order_id > orders.id     │ Many line items belong to one order.            │ CASCADE     │
+│ product_orders.product_id > products.id │ A product can appear in many different orders.  │ NO ACTION   │
+└─────────────────────────────────────────┴─────────────────────────────────────────────────┴─────────────┘
+
+BUSINESS RULES for PRODUCT_ORDERS:
+┌────────┬──────────────────────────────────────────────────────────────────────────────────┐
+│ Rule # │ Description                                                                      │
+├────────┼──────────────────────────────────────────────────────────────────────────────────┤
+│ 1      │ Cannot create two product_orders with the same product_id for the same order.    │
+│ 2      │ Each product_order must belong to the same restaurant as the associated order.   │
+└────────┴──────────────────────────────────────────────────────────────────────────────────┘
