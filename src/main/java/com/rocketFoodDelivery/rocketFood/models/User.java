@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 // JPA and validation imports
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 // Hibernate imports
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,16 +25,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
-    // todo: Review and complete the User class implementation.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @NotBlank
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank
+    @Column(nullable = false)
     private String password;
 
     @CreationTimestamp

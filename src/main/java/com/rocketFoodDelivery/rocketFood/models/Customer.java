@@ -45,7 +45,6 @@ public class Customer {
     private String phone;
 
     @Email
-    @Column(nullable = false)
     private String email;
 
     @CreationTimestamp
