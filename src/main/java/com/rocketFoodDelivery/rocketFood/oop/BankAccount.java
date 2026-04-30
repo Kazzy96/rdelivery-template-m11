@@ -47,6 +47,11 @@ public class BankAccount {
         return balance;
     }
 
+    @Override
+    public String toString() {
+        return "[BankAccount] " + accountNumber + " | Balance: $" + balance;
+    }
+
     public static void main(String[] args) {
         BankAccount account = new BankAccount("ACC-001", 500.0);
         System.out.println("Account: " + account.getAccountNumber() + " | Opening balance: $" + account.getBalance());

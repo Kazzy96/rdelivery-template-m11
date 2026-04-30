@@ -28,6 +28,15 @@ public class BankCustomer {
         return total;
     }
 
+    public void generateReport() {
+        System.out.println("=== Customer Report: " + name + " ===");
+        for (BankAccount account : accounts) {
+            System.out.println("  " + account);
+        }
+        System.out.println("Total Balance: $" + totalBalance());
+        System.out.println("===============================");
+    }
+
     public static void main(String[] args) {
         BankCustomer customer = new BankCustomer("Alice");
 
@@ -39,10 +48,6 @@ public class BankCustomer {
         customer.addAccount(savings);
         customer.addAccount(basic);
 
-        System.out.println("Customer: " + customer.getName());
-        System.out.println("  " + checking.getAccountNumber() + " balance: $" + checking.getBalance());
-        System.out.println("  " + savings.getAccountNumber() + " balance: $" + savings.getBalance());
-        System.out.println("  " + basic.getAccountNumber() + " balance: $" + basic.getBalance());
-        System.out.println("Total balance: $" + customer.totalBalance());
+        customer.generateReport();
     }
 }

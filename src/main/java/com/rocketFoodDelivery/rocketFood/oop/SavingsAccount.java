@@ -14,6 +14,11 @@ public class SavingsAccount extends BankAccount {
     }
 
     @Override
+    public String toString() {
+        return "[SavingsAccount] " + accountNumber + " | Balance: $" + balance + " | Interest Rate: " + (interestRate * 100) + "%";
+    }
+
+    @Override
     public void deposit(double amount) {
         double interest = amount * interestRate;
         double effectiveDeposit = amount + interest;

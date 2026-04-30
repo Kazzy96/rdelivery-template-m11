@@ -14,6 +14,11 @@ public class CheckingAccount extends BankAccount {
     }
 
     @Override
+    public String toString() {
+        return "[CheckingAccount] " + accountNumber + " | Balance: $" + balance + " | Overdraft Limit: $" + overdraftLimit;
+    }
+
+    @Override
     public void withdraw(double amount) {
         if (amount <= balance + overdraftLimit) {
             balance -= amount;
