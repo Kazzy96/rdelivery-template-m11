@@ -25,7 +25,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "customers")
 public class Customer {
-    // todo: Review and complete the Customer class implementation.
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
@@ -38,7 +37,7 @@ public class Customer {
     @JoinColumn(name = "address_id" , nullable = false)
     private Address address;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean active;
 
     @Column(nullable = false)
