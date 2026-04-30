@@ -8,9 +8,11 @@ import com.rocketFoodDelivery.rocketFood.repository.AddressRepository;
 
 // Spring Framework
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 // Java standard library
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressService {
@@ -18,17 +20,28 @@ public class AddressService {
     private final AddressRepository addressRepository;
 
     // Constructor
-    public AddressService(AddressRepository addressRepository){
+    public AddressService(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
-    
-    // todo: Review and complete the Address Service class implementation
-    // save() - findById() - deleteById()
-    
-    // Method to find all addresses
+
+    // Find all addresses ordered by ID descending
     public List<Address> findAll() {
-        return addressRepository.findAll();
+        return addressRepository.findAllByOrderByIdDesc();
     }
-    
-    // todo: If needed, add any additional custom query methods
+
+    // Find a single address by ID
+    public Optional<Address> findById(int id) {
+        return addressRepository.findById(id);
+    }
+
+    // Create or update an address
+    public Address save(Address address) {
+        return addressRepository.save(address);
+    }
+
+    // Delete an address by ID
+    @Transactional
+    public void deleteById(int id) {
+        addressRepository.deleteById(id);
+    }
 }
