@@ -13,6 +13,11 @@ public class SavingsAccount extends BankAccount {
         return interestRate;
     }
 
+    public void updateInterestRate(double newRate) {
+        this.interestRate = newRate;
+        System.out.println("Interest rate updated to " + (newRate * 100) + "%");
+    }
+
     @Override
     public String toString() {
         return "[SavingsAccount] " + accountNumber + " | Balance: $" + balance + " | Interest Rate: " + (interestRate * 100) + "%";
@@ -30,8 +35,10 @@ public class SavingsAccount extends BankAccount {
         SavingsAccount savings = new SavingsAccount("SAV-001", 1000.0, 0.05);
         System.out.println("Account: " + savings.getAccountNumber() + " | Opening balance: $" + savings.getBalance() + " | Interest rate: " + (savings.getInterestRate() * 100) + "%");
 
-        savings.deposit(200.0);   // $200 + 5% interest = $210 added
-        savings.deposit(500.0);   // $500 + 5% interest = $525 added
-        savings.withdraw(100.0);  // inherited withdraw — no interest on withdrawals
+        savings.deposit(200.0);   // $200 + 5% = $210 added
+
+        savings.updateInterestRate(0.10);  // change rate to 10%
+
+        savings.deposit(200.0);   // $200 + 10% = $220 added
     }
 }
