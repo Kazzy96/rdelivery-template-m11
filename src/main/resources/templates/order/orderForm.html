@@ -20,7 +20,7 @@
                     <select id="restaurantId" class="form-select"
                             th:field="*{restaurant.id}"
                             th:classappend="${#fields.hasErrors('restaurant')} ? 'is-invalid'">
-                        <option value="">-- Select Restaurant --</option>
+                        <option value="0">-- Select Restaurant --</option>
                         <option th:each="r : ${restaurants}" th:value="${r.id}" th:text="${r.name}"></option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('restaurant')}" th:errors="*{restaurant}"></div>
@@ -31,7 +31,7 @@
                     <select id="customerId" class="form-select"
                             th:field="*{customer.id}"
                             th:classappend="${#fields.hasErrors('customer')} ? 'is-invalid'">
-                        <option value="">-- Select Customer --</option>
+                        <option value="0">-- Select Customer --</option>
                         <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.user.name}"></option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}"></div>
@@ -42,7 +42,7 @@
                     <select id="orderStatusId" class="form-select"
                             th:field="*{orderStatus.id}"
                             th:classappend="${#fields.hasErrors('orderStatus')} ? 'is-invalid'">
-                        <option value="">-- Select Status --</option>
+                        <option value="0">-- Select Status --</option>
                         <option th:each="s : ${orderStatuses}" th:value="${s.id}" th:text="${s.name}"></option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('orderStatus')}" th:errors="*{orderStatus}"></div>

@@ -20,7 +20,7 @@
                     <select id="productId" class="form-select"
                             th:field="*{product.id}"
                             th:classappend="${#fields.hasErrors('product')} ? 'is-invalid'">
-                        <option value="">-- Select Product --</option>
+                        <option value="0">-- Select Product --</option>
                         <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name}"></option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></div>
@@ -31,7 +31,7 @@
                     <select id="orderId" class="form-select"
                             th:field="*{order.id}"
                             th:classappend="${#fields.hasErrors('order')} ? 'is-invalid'">
-                        <option value="">-- Select Order --</option>
+                        <option value="0">-- Select Order --</option>
                         <option th:each="o : ${orders}" th:value="${o.id}"
                                 th:text="'Order #' + ${o.id} + ' - ' + ${o.restaurant.name}"></option>
                     </select>

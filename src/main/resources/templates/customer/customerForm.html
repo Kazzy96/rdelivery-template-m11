@@ -20,7 +20,7 @@
                     <select id="userId" class="form-select"
                             th:field="*{user.id}"
                             th:classappend="${#fields.hasErrors('user')} ? 'is-invalid'">
-                        <option value="">-- Select User --</option>
+                        <option value="0">-- Select User --</option>
                         <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></div>
@@ -31,7 +31,7 @@
                     <select id="addressId" class="form-select"
                             th:field="*{address.id}"
                             th:classappend="${#fields.hasErrors('address')} ? 'is-invalid'">
-                        <option value="">-- Select Address --</option>
+                        <option value="0">-- Select Address --</option>
                         <option th:each="a : ${addresses}" th:value="${a.id}"
                                 th:text="${a.streetAddress + ', ' + a.city}"></option>
                     </select>

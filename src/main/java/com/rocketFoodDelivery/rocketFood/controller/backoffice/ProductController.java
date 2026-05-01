@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 // Project models
 import com.rocketFoodDelivery.rocketFood.models.Product;
+import com.rocketFoodDelivery.rocketFood.models.Restaurant;
 
 // Project services
 import com.rocketFoodDelivery.rocketFood.service.ProductService;
@@ -49,7 +50,9 @@ public class ProductController {
     // CREATE - Show empty form
     @GetMapping("/new")
     public String showCreateForm(Model model) {
-        model.addAttribute("product", new Product());
+        Product product = new Product();
+        product.setRestaurant(new Restaurant());
+        model.addAttribute("product", product);
         model.addAttribute("restaurants", restaurantService.findAll());
         return "product/productForm";
     }

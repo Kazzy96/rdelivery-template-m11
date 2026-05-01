@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 // Project models
+import com.rocketFoodDelivery.rocketFood.models.Address;
 import com.rocketFoodDelivery.rocketFood.models.Restaurant;
+import com.rocketFoodDelivery.rocketFood.models.User;
 
 // Project services
 import com.rocketFoodDelivery.rocketFood.service.AddressService;
@@ -53,7 +55,10 @@ public class RestaurantController {
     // CREATE - Show empty form
     @GetMapping("/new")
     public String showCreateForm(Model model) {
-        model.addAttribute("restaurant", new Restaurant());
+        Restaurant restaurant = new Restaurant();
+        restaurant.setUser(new User());
+        restaurant.setAddress(new Address());
+        model.addAttribute("restaurant", restaurant);
         model.addAttribute("users", userService.findAll());
         model.addAttribute("addresses", addressService.findAll());
         return "restaurant/restaurantForm";

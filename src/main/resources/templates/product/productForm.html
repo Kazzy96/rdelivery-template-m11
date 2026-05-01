@@ -20,7 +20,7 @@
                     <select id="restaurantId" class="form-select"
                             th:field="*{restaurant.id}"
                             th:classappend="${#fields.hasErrors('restaurant')} ? 'is-invalid'">
-                        <option value="">-- Select Restaurant --</option>
+                        <option value="0">-- Select Restaurant --</option>
                         <option th:each="r : ${restaurants}" th:value="${r.id}" th:text="${r.name}"></option>
                     </select>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('restaurant')}" th:errors="*{restaurant}"></div>
