@@ -1,0 +1,23 @@
+<!-- Navigation Fragment - Rocket Delivery Back Office -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="nav" class="navbar navbar-expand navbar-dark bg-dark px-3">
+    <a class="navbar-brand" th:href="@{/}">&#128640; Rocket Delivery</a>
+    <ul class="navbar-nav me-auto small">
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/users}">Users</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/addresses}">Addresses</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/employees}">Employees</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/restaurants}">Restaurants</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/customers}">Customers</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/products}">Products</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/order-statuses}">Order Statuses</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/orders}">Orders</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/backoffice/product-orders}">Product Orders</a></li>
+    </ul>
+    <form th:action="@{/logout}" method="post" class="d-flex ms-3">
+        <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+    </form>
+</nav>
+</body>
+</html>
