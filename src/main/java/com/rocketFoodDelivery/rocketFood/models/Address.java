@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 // JPA and validation imports
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 // Hibernate imports
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,18 +25,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "addresses")
 public class Address {
-    // todo: Review and complete the Address class implementation.
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
+    @NotBlank
+    @Column(nullable = false)
     private String streetAddress;
 
-    @NotNull
+    @NotBlank
+    @Column(nullable = false)
     private String city;
 
-    @NotNull
+    @NotBlank
+    @Column(nullable = false)
     private String postalCode;
 
     @CreationTimestamp

@@ -1,15 +1,18 @@
 package com.rocketFoodDelivery.rocketFood.service;
 
-// Project moodels
+// Project models
+import com.rocketFoodDelivery.rocketFood.models.Customer;
 
 // Project repositories
 import com.rocketFoodDelivery.rocketFood.repository.CustomerRepository;
 
-// Java standard library
-
 // Spring Framework
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+// Java standard library
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -17,18 +20,28 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     // Constructor
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
-    // todo: Review and complete the User Service class implementation
-    // save() - findById() - findAll()
+    // Find all customers ordered by ID descending
+    public List<Customer> findAll() {
+        return customerRepository.findAllByOrderByIdDesc();
+    }
 
-    // Method to delete a customer by ID
+    // Find a single customer by ID
+    public Optional<Customer> findById(int id) {
+        return customerRepository.findById(id);
+    }
+
+    // Create or update a customer
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    // Delete a customer by ID
     @Transactional
     public void deleteById(int id) {
         customerRepository.deleteById(id);
     }
-
-    // todo: If needed, add any additional custom query methods
 }

@@ -1,1 +1,67 @@
-<!-- todo: Complete the Order HTML ThymeLeaf Form (Create, Update) View implementation -->
+<!-- Order Form - Rocket Delivery Back Office -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title th:text="${order.id == 0 ? 'Create Order' : 'Edit Order'}">Order Form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+        <nav th:replace="~{fragments/nav :: nav}"></nav>
+        <main class="container py-4">
+            <h1 class="h3 mb-4" th:text="${order.id == 0 ? 'Create Order' : 'Edit Order'}">Order Form</h1>
+
+            <form th:action="${order.id == 0 ? '/backoffice/orders' : '/backoffice/orders/' + order.id}"
+                  th:object="${order}" method="post" class="card p-4 bg-white">
+
+                <div class="mb-3">
+                    <label for="restaurantId" class="form-label">Restaurant</label>
+                    <select id="restaurantId" class="form-select"
+                            th:field="*{restaurant.id}"
+                            th:classappend="${#fields.hasErrors('restaurant')} ? 'is-invalid'">
+                        <option value="0">-- Select Restaurant --</option>
+                        <option th:each="r : ${restaurants}" th:value="${r.id}" th:text="${r.name}"></option>
+                    </select>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('restaurant')}" th:errors="*{restaurant}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="customerId" class="form-label">Customer</label>
+                    <select id="customerId" class="form-select"
+                            th:field="*{customer.id}"
+                            th:classappend="${#fields.hasErrors('customer')} ? 'is-invalid'">
+                        <option value="0">-- Select Customer --</option>
+                        <option th:each="c : ${customers}" th:value="${c.id}" th:text="${c.user.name}"></option>
+                    </select>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="orderStatusId" class="form-label">Order Status</label>
+                    <select id="orderStatusId" class="form-select"
+                            th:field="*{orderStatus.id}"
+                            th:classappend="${#fields.hasErrors('orderStatus')} ? 'is-invalid'">
+                        <option value="0">-- Select Status --</option>
+                        <option th:each="s : ${orderStatuses}" th:value="${s.id}" th:text="${s.name}"></option>
+                    </select>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('orderStatus')}" th:errors="*{orderStatus}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="restaurantRating" class="form-label">Rating (1–5, optional)</label>
+                    <input type="number" id="restaurantRating" class="form-control" min="1" max="5"
+                           th:field="*{restaurantRating}"
+                           th:classappend="${#fields.hasErrors('restaurantRating')} ? 'is-invalid'">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('restaurantRating')}" th:errors="*{restaurantRating}"></div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary"
+                            th:text="${order.id == 0 ? 'Create' : 'Update'}">Submit</button>
+                    <a th:href="@{/backoffice/orders}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>
